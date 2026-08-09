@@ -1,0 +1,2 @@
+# Optional dependency used by scripts/contador.py for model-token counts.
+tiktoken>=0.7,<1.0

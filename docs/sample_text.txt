@@ -1,5 +1,0 @@
-Este é um pequeno exemplo de texto usado para testar operações de processamento textual.
-
-O objetivo é verificar se os scripts conseguem contar palavras, caracteres e linhas sem depender de ficheiros grandes.
-
-Mais tarde, este exemplo poderá ser substituído por amostras reais de textos históricos em domínio público.

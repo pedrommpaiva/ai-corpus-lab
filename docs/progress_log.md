@@ -1,19 +1,23 @@
 # Progress Log
 
-## 2026-05-11
+## 2026-08-09
 
-Initial public structure created.
+Repository maintenance pass:
 
-Current work focuses on:
-
-- organizing corpus processing scripts;
-- documenting the workflow;
-- preparing examples of text cleaning, sentence extraction and chunking;
-- later testing semantic search and RAG over the corpus.
+- documented setup, structure, responsible data handling and current commands;
+- consolidated the public sample under `examples/`;
+- moved executable corpus counting code from `docs/` to `scripts/`;
+- added command-line paths and validation to the chunking workflow;
+- added unit tests and a minimal GitHub Actions workflow.
 
 Next steps:
 
-- add a corpus counting script;
-- add a sentence extraction script;
-- add a chunking script;
-- include small example files.
+- add sentence-extraction fixtures for historical Portuguese;
+- validate the metadata CSV schema before processing;
+- make the remaining scripts accept explicit input and output paths;
+- document a small end-to-end corpus example;
+- define retrieval-quality evaluation criteria.
+
+## 2026-05-11
+
+Initial public structure created, with corpus-processing scripts, methodology notes and small examples.
