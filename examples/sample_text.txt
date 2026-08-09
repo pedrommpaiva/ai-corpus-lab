@@ -1,1 +1,5 @@
--
+Este é um pequeno exemplo de texto usado para testar operações de processamento textual.
+
+O objetivo é verificar se os scripts conseguem contar palavras, caracteres e linhas sem depender de ficheiros grandes. O conteúdo é neutro, não contém dados pessoais e pode ser substituído por textos históricos em domínio público.
+
+Uma segunda frase permite testar a segmentação. Será que a pontuação é preservada? Sim, o resultado deve continuar legível e rastreável até este ficheiro.

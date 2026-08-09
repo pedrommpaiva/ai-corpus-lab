@@ -1,10 +1,7 @@
+import argparse
 import csv
 import json
 import pathlib
-
-PASTA_BASE = pathlib.Path(".")
-FICHEIRO_METADADOS = PASTA_BASE / "metadados_corpus_revisto.csv"
-OUTPUT = PASTA_BASE / "corpus_mestre.json"
 
 
 def ler_csv(path):
@@ -27,11 +24,20 @@ def separar_temas(valor):
     return [t.strip() for t in valor.split(";") if t.strip()]
 
 
-def main():
-    if not FICHEIRO_METADADOS.exists():
-        raise FileNotFoundError(f"Não encontrei: {FICHEIRO_METADADOS}")
+def parse_args():
+    parser = argparse.ArgumentParser(description="Cria um corpus JSON a partir de CSV e TXT.")
+    parser.add_argument("--metadata", type=pathlib.Path, default=pathlib.Path("metadados_corpus_revisto.csv"))
+    parser.add_argument("--text-dir", type=pathlib.Path, default=pathlib.Path("."))
+    parser.add_argument("--output", type=pathlib.Path, default=pathlib.Path("corpus_mestre.json"))
+    return parser.parse_args()
 
-    linhas = ler_csv(FICHEIRO_METADADOS)
+
+def main():
+    args = parse_args()
+    if not args.metadata.exists():
+        raise FileNotFoundError(f"Não encontrei: {args.metadata}")
+
+    linhas = ler_csv(args.metadata)
 
     corpus = []
     erros = []
@@ -46,7 +52,7 @@ def main():
             })
             continue
 
-        caminho_txt = PASTA_BASE / ficheiro_txt
+        caminho_txt = args.text_dir / ficheiro_txt
 
         if not caminho_txt.exists():
             erros.append({
@@ -81,13 +87,13 @@ def main():
 
         corpus.append(doc)
 
-    with open(OUTPUT, "w", encoding="utf-8") as f:
+    with open(args.output, "w", encoding="utf-8") as f:
         json.dump(corpus, f, ensure_ascii=False, indent=2)
 
     print("Corpus-mestre criado.")
     print(f"Documentos incluídos: {len(corpus)}")
     print(f"Erros: {len(erros)}")
-    print(f"Ficheiro criado: {OUTPUT}")
+    print(f"Ficheiro criado: {args.output}")
 
     total_chars = sum(doc["caracteres"] for doc in corpus)
     total_words = sum(doc["palavras_aprox"] for doc in corpus)
